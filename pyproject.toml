@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "demoPython-bdd"
+version = "0.1.0"
+description = ""
+authors = ["isyed <isyed@progress.com>"]
+readme = "README.md"
+
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pytest = "^8.2.0"
+pytest-bdd = "^7.1.2"
+assertpy = "^1.1"
+requests = "^2.32.2"
+aiohttp = "^3.9.5"
+asyncio = "^3.4.3"
+cachetools = "^5.3.3"
+plumbum = "^1.8.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
