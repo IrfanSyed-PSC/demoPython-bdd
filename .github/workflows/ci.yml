@@ -1,0 +1,42 @@
+name: Demo Python with Docker
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      docker:
+        image: docker:19.03.12
+        options: --privileged
+    container:
+      image: python:3.11-slim
+      options: --user root
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install system dependencies
+      run: |
+        apt-get update
+        apt-get install -y --no-install-recommends docker.io
+      shell: bash
+
+    - name: Install Poetry
+      run: |
+        pip install poetry
+
+    - name: Install dependencies
+      run: |
+        poetry config virtualenvs.in-project true
+        poetry lock --no-update
+        poetry install --no-ansi --no-root
+
+    - name: Run tests
+      run: |
+        . .venv/bin/activate
+        .venv/bin/python -m pytest
